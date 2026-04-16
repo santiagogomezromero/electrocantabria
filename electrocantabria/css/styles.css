@@ -735,7 +735,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
   display: flex;
   gap: var(--space-4);
   width: max-content;
-  animation: brands-scroll 40s linear infinite;
+  animation: brands-scroll 55s linear infinite;
 }
 
 .brands-track:hover { animation-play-state: paused; }
@@ -817,6 +817,16 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 }
 
 .map-placeholder svg { width: 100%; height: auto; }
+
+.cantabria-map {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border);
+  background: #f4f8ff;
+  display: block;
+}
 
 /* ============================================================
    10. FAQ
