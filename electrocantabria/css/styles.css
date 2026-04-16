@@ -186,6 +186,8 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
   min-height: 48px;
   white-space: nowrap;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:focus-visible {
@@ -348,6 +350,9 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
   font-weight: 700;
   color: var(--color-primary);
   transition: color var(--transition);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
 }
 
 .header__phone:hover { color: var(--color-primary-dark); }
@@ -500,9 +505,19 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 
 .hero__actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--space-4);
   margin-bottom: var(--space-6);
+}
+
+.hero__actions .btn { width: 100%; justify-content: center; }
+
+@media (min-width: 480px) {
+  .hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .hero__actions .btn { width: auto; }
 }
 
 .hero__phone-display {
@@ -560,13 +575,17 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-4);
   margin-bottom: var(--space-12);
 }
 
+@media (min-width: 480px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (min-width: 768px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+  .services-grid { gap: var(--space-6); }
 }
 
 @media (min-width: 1024px) {
@@ -577,8 +596,16 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-6);
+  padding: var(--space-4);
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+@media (min-width: 480px) {
+  .service-card { padding: var(--space-5); }
+}
+
+@media (min-width: 768px) {
+  .service-card { padding: var(--space-6); }
 }
 
 .service-card:hover {
@@ -695,7 +722,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 .stat-card__number {
   display: block;
   font-family: var(--font-heading);
-  font-size: 48px;
+  font-size: clamp(36px, 8vw, 48px);
   font-weight: 800;
   color: var(--color-primary);
   line-height: 1;
@@ -1084,7 +1111,47 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 .footer__bottom a:hover { color: var(--color-accent); }
 
 /* ============================================================
-   14. BOTÓN FLOTANTE MOBILE
+   14. BARRA DE LLAMADA MOBILE
+   ============================================================ */
+
+.mobile-call-bar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-call-bar {
+    display: block;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--color-primary);
+  }
+
+  .mobile-call-bar__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* compensar el espacio de la barra adicional */
+  .hero {
+    padding-top: calc(var(--header-h) + 44px);
+  }
+}
+
+/* ============================================================
+   16. BOTÓN FLOTANTE MOBILE
    ============================================================ */
 
 .floating-call {
@@ -1124,7 +1191,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; }
 }
 
 /* ============================================================
-   15. ACCESSIBILITY
+   17. ACCESSIBILITY
    ============================================================ */
 
 :focus-visible {
